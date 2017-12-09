@@ -3,14 +3,14 @@
 %%% Pollable Channel Worker.
 %%% @end
 %%%-------------------------------------------------------------------
--module(activity_manager).
+-module(becareful_workers).
 
 -behaviour(gen_server).
 
+-define(TABLE, activity_manager).
 %% API
 -export([
-  start_link/1,
-  start_link/0
+  start_link/1
 ]).
 
 %% gen_server callbacks
@@ -26,19 +26,16 @@
 %%% API
 %%%===================================================================
 
-%% @equiv start_link(Opts, #{})
-start_link() ->
-  gen_server:start_link(?MODULE, [], []).
-
 start_link(Name) ->
-  gen_server:start_link({local, Name}, ?MODULE, [], []).
+  gen_server:start_link({local, Name}, ?MODULE, [Name], []).
 
 %%%===================================================================
 %%% gen_server callbacks
 %%%===================================================================
 
 %% @hidden
-init([]) ->
+init([Name]) ->
+  ok = becareful_db:set(?TABLE, Name, 0),
   {ok, #{}}.
 
 %% @hidden
@@ -50,8 +47,8 @@ handle_cast(_Request, State) ->
   {noreply, State}.
 
 %% @hidden
-handle_info(received_event, State) ->
-  %%erlang:display(gotthemessage),
+handle_info({received_event, Name}, State) ->
+  ok = becareful_db:update(?TABLE, Name),
   {noreply, State}.
 
 %% @hidden

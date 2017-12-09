@@ -12,7 +12,7 @@ send_activity(Event) when is_binary(Event);
 		undefined ->
 			start_worker(WorkerName);
 		_ ->
-			_ = WorkerName ! received_event,
+			_ = WorkerName ! {received_event, WorkerName},
 			ok
 	end;
 send_activity(_Event) ->
@@ -21,8 +21,8 @@ send_activity(_Event) ->
 %% private
 start_worker(WorkerName) ->
 	case supervisor:start_child(becareful_sup, [WorkerName]) of
-		{ok, _} ->	
-			WorkerName ! received_event, 
+		{ok, _} ->
+			WorkerName ! {received_event, WorkerName},
 			ok;
 		_ ->	
 			error

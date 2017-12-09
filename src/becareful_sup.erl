@@ -28,8 +28,9 @@ start_link() ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-  Child_Spec = [{activity_manager,{activity_manager,start_link,[]},
-                temporary, 5000, worker, [activity_manager]}],
+	ok = becareful_db:init(activity_manager),
+  Child_Spec = [{becareful_workers,{becareful_workers,start_link,[]},
+                temporary, 5000, worker, [becareful_workers]}],
   {ok,{{simple_one_for_one,3,1}, Child_Spec}}.
 
 %%====================================================================

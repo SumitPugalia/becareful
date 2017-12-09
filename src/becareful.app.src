@@ -1,12 +1,12 @@
 {application, becareful,
- [{description, "Erlang application for Analytics"},
-  {vsn, "0.1.0"},
-  {registered, []},
-  {mod, {becareful, []}},
-  {applications, [
-    kernel,
-    stdlib
-  ]},
-  {env,[]},
-  {modules, []}
- ]}.
+	[{description, "Erlang application for Analytics"},
+		{vsn, "0.1.0"},
+		{registered, []},
+		{mod, {becareful, []}},
+		{applications, [
+		  kernel,
+		  stdlib
+		]},
+		{env,[]},
+		{modules, []}
+	]}.
