@@ -1,8 +1,8 @@
--module(activity_manager_handler).
+-module(event_manager_handler).
 
 -behaviour(trails_handler).
 
--define(TABLE, activity_manager).
+-define(TABLE, event_manager).
 
 -type req() :: cowboy_req:req().
 -type state() :: map().

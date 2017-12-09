@@ -1,8 +1,8 @@
--module(activity_manager_handler_SUITE).
+-module(event_manager_handler_SUITE).
 
 -include_lib("common_test/include/ct.hrl").
 
--define(TABLE, activity_manager).
+-define(TABLE, event_manager).
 
 -export([
   all/0,

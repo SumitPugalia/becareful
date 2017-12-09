@@ -1,6 +1,6 @@
 -module(becareful_api_SUITE).
 
--define(TABLE, activity_manager).
+-define(TABLE, event_manager).
 
 -export([all/0]).
 -export([init_per_suite/1, end_per_suite/1]).

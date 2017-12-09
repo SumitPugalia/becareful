@@ -44,7 +44,7 @@ start_http() ->
          acceptors := Acceptors}} = application:get_env(becareful, webserver),
   Trails = trails:trails([
     cowboy_swagger_handler,
-    activity_manager_handler
+    event_manager_handler
   ]),
   trails:store(Trails),
   Dispatch = trails:single_host_compile(Trails),

@@ -7,7 +7,7 @@
 
 -behaviour(gen_server).
 
--define(TABLE, activity_manager).
+-define(TABLE, event_manager).
 %% API
 -export([
   start_link/1
