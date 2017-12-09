@@ -5,8 +5,13 @@
 		{mod, {becareful, []}},
 		{applications, [
 		  kernel,
-		  stdlib
+		  stdlib,
+      cowboy,
+      trails,
+      cowboy_swagger
 		]},
 		{env,[]},
-		{modules, []}
+		{modules, []},
+		{maintainers, ["Sumit Pugalia"]},
+    {licenses, ["Apache 2.0"]}
 	]}.

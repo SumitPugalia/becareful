@@ -22,11 +22,13 @@ start() ->
   application:ensure_all_started(becareful).
 
 start(_StartType, _StartArgs) ->
+  {ok, _Pid} = start_http(),
   becareful_sup:start_link().
 
 %% @doc Stops the app
 -spec stop() -> ok.
 stop() ->
+  ok = stop_http(),
   application:stop(becareful).
 
 stop(_State) ->
@@ -35,3 +37,19 @@ stop(_State) ->
 %%====================================================================
 %% Internal functions
 %%====================================================================
+
+%% private
+start_http() ->
+  {ok, #{port := Port,
+         acceptors := Acceptors}} = application:get_env(becareful, webserver),
+  Trails = trails:trails([
+    cowboy_swagger_handler,
+    activity_manager_handler
+  ]),
+  trails:store(Trails),
+  Dispatch = trails:single_host_compile(Trails),
+  cowboy:start_http(becareful_http, Acceptors, [{port, Port}], [{env, [{dispatch, Dispatch}]}]).
+
+%% private
+stop_http() ->
+  cowboy:stop_listener(becareful_http).

@@ -1,11 +1,11 @@
 -module(becareful_api).
 
 -export([
-  send_activity/1
+  send_event/1
 ]).
 
--spec send_activity(any()) -> ok | error.
-send_activity(Event) when is_binary(Event);
+-spec send_event(any()) -> ok | error.
+send_event(Event) when is_binary(Event);
   is_list(Event);is_atom(Event) ->
   WorkerName = becareful_utils:to_atom(Event),
   case whereis(WorkerName) of
@@ -15,7 +15,7 @@ send_activity(Event) when is_binary(Event);
       _ = WorkerName ! {received_event, WorkerName},
       ok
   end;
-send_activity(_Event) ->
+send_event(_Event) ->
   error.
 
 %% private

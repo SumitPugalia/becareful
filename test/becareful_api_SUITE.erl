@@ -24,11 +24,11 @@ end_per_suite(_) ->
 
 -spec success(becareful_ct:config()) -> ok.
 success(_Config) ->
-  ok = becareful_api:send_activity("video"),
+  ok = becareful_api:send_event("video"),
   ok = wait_for_success(video, 1),
-  ok = becareful_api:send_activity("video"),
-  ok = becareful_api:send_activity("gif"),
-  ok = becareful_api:send_activity("message"),
+  ok = becareful_api:send_event("video"),
+  ok = becareful_api:send_event("gif"),
+  ok = becareful_api:send_event("message"),
   ok = wait_for_success(video, 2),
   ok = wait_for_success(gif, 1),
   ok = wait_for_success(message, 1),
@@ -36,7 +36,7 @@ success(_Config) ->
 
 -spec error(becareful_ct:config()) -> ok.
 error(_Config) ->
-  error = becareful_api:send_activity(#{}),
+  error = becareful_api:send_event(#{}),
   ok.
 
 wait_for_success(Key, Value) ->

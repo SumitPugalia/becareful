@@ -1,1 +1,20 @@
-[].
+{"1.1.0",
+[{<<"cowboy">>,{pkg,<<"cowboy">>,<<"1.0.4">>},2},
+ {<<"cowboy_swagger">>,
+  {git,"https://github.com/inaka/cowboy_swagger.git",
+       {ref,"c1258a1367ca450a47e04c6cef3e94cb93a00a40"}},
+  0},
+ {<<"cowlib">>,{pkg,<<"cowlib">>,<<"1.0.2">>},3},
+ {<<"jsx">>,
+  {git,"https://github.com/talentdeficit/jsx.git",
+       {ref,"45ffea21a6863c58fb7da1f937e868916ff68b27"}},
+  0},
+ {<<"ranch">>,{pkg,<<"ranch">>,<<"1.2.1">>},2},
+ {<<"trails">>,{pkg,<<"trails">>,<<"0.2.1">>},1}]}.
+[
+{pkg_hash,[
+ {<<"cowboy">>, <<"A324A8DF9F2316C833A470D918AAF73AE894278B8AA6226CE7A9BF699388F878">>},
+ {<<"cowlib">>, <<"9D769A1D062C9C3AC753096F868CA121E2730B9A377DE23DEC0F7E08B1DF84EE">>},
+ {<<"ranch">>, <<"A6FB992C10F2187B46FFD17CE398DDF8A54F691B81768F9EF5F461EA7E28C762">>},
+ {<<"trails">>, <<"6769F7A2B777EC9CEAF07F22C23E5F3BE6A7F07E9A11B44725B102A832334D46">>}]}
+].
