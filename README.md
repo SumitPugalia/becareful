@@ -1,2 +1,9 @@
-# becareful
-BeCareful
+becareful
+=====
+
+An OTP application
+
+Build
+-----
+
+    $ rebar3 compile
