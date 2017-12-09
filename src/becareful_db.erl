@@ -36,20 +36,28 @@ init(Name) ->
 %% @doc return all the records in the ets table.
 -spec all(atom()) -> [{key(), value()}].
 all(Name) ->
-  MS = ets:fun2ms(fun({X, Y}) -> {X, Y} end),
-  ets:select(Name, MS).
+  AllEvents = lists:foldl(fun(Node, Acc) ->
+                rpc:call(Node, becareful_db, all_elements, [Name]) ++ Acc
+              end, all_elements(Name), nodes()),
+  becareful_utils:merge_events(lists:sort(AllEvents)).
 
 %% @doc return the value with particular key in the ets table
 %% if key not found return undefined
--spec get(atom(), key()) -> value() | undefined.
+-spec get(atom(), key()) -> value().
 get(Name, Key) when is_atom(Key) ->
-  get(Name, Key, undefined).
+  get(Name, Key, 0).
 
 %% @doc return the value with particular key in the ets table
 %% if key not found return the Default value passed
 -spec get(atom(), key(), any()) -> value() | any().
 get(Name, Key, Default) when is_atom(Key) ->
-  lookup_element(Name, Key, 2, Default).
+  try
+    lists:foldl(fun(Node, Acc) ->
+      rpc:call(Node, becareful_db, lookup_element, [Name, Key, 2, Default]) + Acc
+    end, lookup_element(Name, Key, 2, Default), nodes())
+  catch
+    _:_ -> Default
+  end.
 
 %% @doc insert the record in the ets table.
 -spec set(atom(), key(), value()) -> ok.
@@ -73,3 +81,7 @@ lookup_element(Name, Key, Pos, Default) ->
   catch
     _:_ -> Default
   end.
+
+all_elements(Name) ->
+  MS = ets:fun2ms(fun({X, Y}) -> {X, Y} end),
+  ets:select(Name, MS).

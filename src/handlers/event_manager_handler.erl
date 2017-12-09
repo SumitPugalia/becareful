@@ -86,7 +86,7 @@ resource_exists(Req, State) ->
         {true, Req2, State#{event_info => Info}};
     {<<"GET">>, _} ->
       case becareful_db:get(?TABLE, becareful_utils:to_atom(Event)) of
-        undefined ->
+        0 ->
           {false, Req2, State};
         Info ->
           {true, Req2, State#{event_info => Info}}

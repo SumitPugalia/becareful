@@ -3,7 +3,8 @@
 -export([
   to_atom/1,
   encode/1,
-  decode/1
+  decode/1,
+  merge_events/1
 ]).
 
 -spec to_atom(binary() |list() |atom()) -> atom().
@@ -26,3 +27,19 @@ decode(Data) ->
   catch
     _:_ -> throw({bad_json, Data})
   end.
+
+-spec merge_events(list()) -> list().
+merge_events(Events) ->
+  {LEvent, LCount, Result} = lists:foldl(fun(Event, Acc) ->
+                              {EventName, Count} = Event,
+                              {PEventName, PCount, NewAcc} = Acc,
+                              case PEventName of
+                                EventName ->
+                                  {PEventName, PCount + Count, NewAcc};
+                                0 ->
+                                  {EventName, Count, NewAcc};
+                                _ ->
+                                  {EventName, Count, NewAcc ++ [{PEventName, PCount}]}
+                                end
+                              end, {0, 0, []}, Events),
+  Result ++ [{LEvent, LCount}].
