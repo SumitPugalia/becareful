@@ -1,29 +1,29 @@
 -module(becareful_api).
 
 -export([
-	send_activity/1
+  send_activity/1
 ]).
 
 -spec send_activity(any()) -> ok | error.
 send_activity(Event) when is_binary(Event);
-	is_list(Event);is_atom(Event) ->
-	WorkerName = becareful_utils:to_atom(Event),
-	case whereis(WorkerName) of
-		undefined ->
-			start_worker(WorkerName);
-		_ ->
-			_ = WorkerName ! {received_event, WorkerName},
-			ok
-	end;
+  is_list(Event);is_atom(Event) ->
+  WorkerName = becareful_utils:to_atom(Event),
+  case whereis(WorkerName) of
+    undefined ->
+      start_worker(WorkerName);
+    _ ->
+      _ = WorkerName ! {received_event, WorkerName},
+      ok
+  end;
 send_activity(_Event) ->
-	error. 
+  error.
 
 %% private
 start_worker(WorkerName) ->
-	case supervisor:start_child(becareful_sup, [WorkerName]) of
-		{ok, _} ->
-			WorkerName ! {received_event, WorkerName},
-			ok;
-		_ ->	
-			error
-	end.
+  case supervisor:start_child(becareful_sup, [WorkerName]) of
+    {ok, _} ->
+      WorkerName ! {received_event, WorkerName},
+      ok;
+    _ ->
+      error
+  end.

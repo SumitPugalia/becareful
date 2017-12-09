@@ -28,10 +28,10 @@ start_link() ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-	ok = becareful_db:init(activity_manager),
-  Child_Spec = [{becareful_workers,{becareful_workers,start_link,[]},
+  ok = becareful_db:init(activity_manager),
+  ChildSpec = [{becareful_workers, {becareful_workers, start_link, []},
                 temporary, 5000, worker, [becareful_workers]}],
-  {ok,{{simple_one_for_one,3,1}, Child_Spec}}.
+  {ok, {{simple_one_for_one, 3, 1}, ChildSpec}}.
 
 %%====================================================================
 %% Internal functions

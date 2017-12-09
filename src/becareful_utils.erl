@@ -1,7 +1,7 @@
 -module(becareful_utils).
 
 -export([
-	to_atom/1
+  to_atom/1
 ]).
 
 -spec to_atom(binary() |list() |atom()) -> atom().
