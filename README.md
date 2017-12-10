@@ -19,15 +19,16 @@ How to Use
 
 	Use "becareful_api:send_event(EventName)" to track the event from your backend code.
 
-	Check number of events stored from http://localhost:4010/api-docs/ (act as dashboard). 	
+	Check number of events stored from http://localhost:4010/api-docs/ (act as dashboard).
 
 Where To Use
 ------------
 
 	Can be used in messaging projects to track the number of messages, videos, group chats, gifs, images, files etc shared and analyse the amount of activity in the product.
 
-	Can be useful in gaming servers to track the preference of users to play the type of game like tournament, simple play, play with friend etc, number of users that login through social media sites or play as guest users, number of bids, number of losses of bots etc.  	
+	Can be useful in gaming servers to track the preference of users to play the type of game like tournament, simple play, play with friend etc, number of users that login through social media sites or play as guest users, number of bids, number of losses of bots etc.
 
+	Can be used with any app to track which feature is used most by the users.
 
 About Becareful
 ---------------
