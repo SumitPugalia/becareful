@@ -7,7 +7,9 @@
   get/2,
   get/3,
   set/3,
-  update/2
+  update/2,
+  lookup_element/4,
+  all_elements/1
 ]).
 
 -include_lib("stdlib/include/ms_transform.hrl").

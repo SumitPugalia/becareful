@@ -21,6 +21,25 @@ How to Use
 
 	Check number of events stored from http://localhost:4010/api-docs/ (act as dashboard).
 
+Test
+----
+
+	./rebar3 do ct --name ct@127.0.0.1, cover
+
+	|-------------------------|------------|
+  |                 module  |  coverage  |
+  |-------------------------|------------|
+  |  event_manager_handler  |      100%  |
+  |              becareful  |      100%  |
+  |          becareful_sup  |      100%  |
+  |           becareful_db  |       94%  |
+  |          becareful_api  |       90%  |
+  |        becareful_utils  |       93%  |
+  |-------------------------|------------|
+  |                  total  |       96%  |
+  |-------------------------|------------|
+
+
 Where To Use
 ------------
 
